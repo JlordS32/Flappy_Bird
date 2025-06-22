@@ -26,10 +26,20 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(AudioClip clip)
     {
-        _soundSource.PlayOneShot(clip);
+        _soundSource.Stop();
+        _soundSource.clip = clip;
+        _soundSource.Play();
     }
 
-    public void PauseMusicBG()
+    public void PlayMusic(AudioClip clip, bool loop = true)
+    {
+        if (_musicSource.clip == clip) return;
+        _musicSource.clip = clip;
+        _musicSource.loop = loop;
+        _musicSource.Play();
+    }
+
+    public void PauseMusic()
     {
         if (_musicSource.isPlaying)
             _musicSource.Pause();
@@ -37,7 +47,7 @@ public class AudioManager : MonoBehaviour
             _musicSource.Play();
     }
 
-    public void ResetMusicBG()
+    public void ResetMusic()
     {
         _musicSource.Stop();
         _musicSource.time = 0f;

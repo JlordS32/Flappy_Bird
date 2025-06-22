@@ -1,19 +1,16 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
+    // PROPERTIES
     [SerializeField] InputAction _pauseButton;
     [SerializeField] GameObject _pausePanel;
     [SerializeField] GameObject _deathPanel;
 
-    PlayerMovement _player;
-
-    void Awake()
-    {
-        _player = FindFirstObjectByType<PlayerMovement>();
-    }
+    // VARIABLES
+    bool _isDead;
+    public bool IsDead => _isDead;
 
     void OnEnable()
     {
@@ -27,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (_pauseButton.WasPressedThisFrame())
+        if (_pauseButton.WasPressedThisFrame() && !_isDead)
         {
             TogglePause();
         }
@@ -35,14 +32,15 @@ public class GameManager : MonoBehaviour
 
     public void TogglePause()
     {
-        AudioManager.Instance.PauseMusicBG();
+        AudioManager.Instance.PauseMusic();
         Time.timeScale = Time.timeScale == 0 ? 1 : 0;
         _pausePanel.SetActive(!_pausePanel.activeSelf);
     }
 
     public void ToggleDeath()
     {
-        AudioManager.Instance.PauseMusicBG();
+        _isDead = true;
+        AudioManager.Instance.PauseMusic();
         _deathPanel.SetActive(!_pausePanel.activeSelf);
     }
 }

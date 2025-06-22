@@ -4,14 +4,21 @@ using UnityEditor;
 
 public class GameSceneManager : MonoBehaviour
 {
+    [SerializeField] AudioClip _bgMusic;
+
+    void Start()
+    {
+        AudioManager.Instance.PlayMusic(_bgMusic);
+    }
+
     public void LoadScene(string sceneName)
     {
         Time.timeScale = 1;
 
         if (AudioManager.Instance)
         {
-            AudioManager.Instance.PauseMusicBG();
-            AudioManager.Instance.ResetMusicBG();
+            AudioManager.Instance.PauseMusic();
+            AudioManager.Instance.ResetMusic();
         }
 
         SceneManager.LoadScene(sceneName);
