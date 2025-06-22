@@ -1,6 +1,4 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -19,12 +17,15 @@ public class PlayerMovement : MonoBehaviour
     // REFERENCES
     Rigidbody2D _rb;
     BoxCollider2D _collider;
+    GameManager _gameManager;
     bool _canMove = true;
+    public bool CanMove => _canMove;
 
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _collider = GetComponent<BoxCollider2D>();
+        _gameManager = FindFirstObjectByType<GameManager>();
     }
 
     void Update()
@@ -43,6 +44,8 @@ public class PlayerMovement : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         AudioManager.Instance.PlaySound(_deathSound);
+        _gameManager.ToggleDeath();
+
         _canMove = false;
         _rb.linearVelocity = Vector2.zero;
         _collider.enabled = false;

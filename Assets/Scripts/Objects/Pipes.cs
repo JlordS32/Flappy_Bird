@@ -8,6 +8,9 @@ public class Pipes : MonoBehaviour
     [SerializeField] float _speed = 1f;
     [SerializeField] int _scorePoints = 1;
 
+    [Header("Audio")]
+    [SerializeField] AudioClip _passedSound;
+
     // PRIVATE VARIABLES
     float _screenHalfWidth;
     List<SpriteRenderer> _renderers = new();
@@ -50,6 +53,7 @@ public class Pipes : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            AudioManager.Instance.PlaySound(_passedSound);
             _scoreManager.IncreaseScore(_scorePoints);
             _uiManager.UpdateScoreText(_scoreManager.Score);
         }

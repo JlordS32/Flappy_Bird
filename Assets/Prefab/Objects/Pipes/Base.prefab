@@ -2319,6 +2319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _scorePoints: 1
+  _passedSound: {fileID: 8300000, guid: 36b587dd7eb0a7543a705492f3317720, type: 3}
 --- !u!61 &7706060701707692899
 BoxCollider2D:
   m_ObjectHideFlags: 0

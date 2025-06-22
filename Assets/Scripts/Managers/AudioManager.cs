@@ -28,4 +28,19 @@ public class AudioManager : MonoBehaviour
     {
         _soundSource.PlayOneShot(clip);
     }
+
+    public void PauseMusicBG()
+    {
+        if (_musicSource.isPlaying)
+            _musicSource.Pause();
+        else
+            _musicSource.Play();
+    }
+
+    public void ResetMusicBG()
+    {
+        _musicSource.Stop();
+        _musicSource.time = 0f;
+        _musicSource.Play();
+    }
 }
